@@ -30,6 +30,9 @@ class MQConsumer(object):
     def on_message(self, unused_channel, basic_deliver, properties, body):
         LOGGER.info('Received message # %s from %s: %s',
                     basic_deliver.delivery_tag, properties.app_id, body)
+        for client in clients:
+            client.write_message(body)
+
         self.acknowledge_message(basic_deliver.delivery_tag)
 
     def publish(self, message):
