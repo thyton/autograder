@@ -1,0 +1,42 @@
+<html>
+<head>
+  <!--script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script-->
+  <script type="text/javascript" charset="utf-8">
+/*
+var socket = io.connect('http://' + document.domain + ':' + location.port);
+socket.on('connect', function() {
+  socket.emit('my event', {data: 'I\'m connected!'});
+  console.log('connected');
+});
+
+socket.on('response', function(message){
+  console.log('response');
+  var response = document.getElementById('response');
+  response.innerText = message;
+});
+
+function send(){
+  socket.emit('message', "Hello");
+}
+
+*/
+  
+  var socket = new WebSocket("ws://" + document.domain + ":" + location.port + "/ws");
+
+  socket.onmessage = function(event){
+    console.log(event.data);
+  }
+
+  function send(){
+    console.log('sending');
+    socket.send("Hello");
+  }
+
+  </script>
+</head>
+<body>
+  <h1>Hello World</h1>
+  <button onclick="send()">Click me</button>
+  <div id="response"></div>
+</body>
+</html>
