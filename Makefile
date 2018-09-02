@@ -3,7 +3,9 @@ help:
 	@echo 'if you are using Minikube, you must run the `minikube start` and `eval $$(minikube docker-env)` commands yourself'
 	@echo 'afterwards, run `make devenv`'
 
-devenv: services mounts
+devenv: services mounts running
+
+running:
 	@echo 'the infrastructure services are running'
 	@echo 'you must manually run the frontend and backend services'
 	@echo 'to do so, open a new terminal for each service (frontend, grader, deplagiarizer),'
