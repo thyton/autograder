@@ -1,0 +1,45 @@
+{
+    "metadata": {
+        "labels": {
+            "run": "frontend"
+        },
+        "name": "frontend"
+    },
+    "spec": {
+        "containers": [
+            {
+                "args": [
+                    "bash"
+                ],
+                "image": "python:3.7.0",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "frontend",
+                "ports": [
+                    {
+                        "containerPort": 5000,
+                        "protocol": "TCP"
+                    }
+                ],
+                "stdin": true,
+                "stdinOnce": true,
+                "tty": true,
+                "volumeMounts": [
+                    {
+                        "mountPath": "/src/frontend",
+                        "name": "frontend-src"
+                    }
+                ]
+            }
+        ],
+        "restartPolicy": "Never",
+        "volumes": [
+            {
+                "name": "frontend-src",
+                "hostPath": {
+                    "path": "/src/frontend",
+                    "type": "Directory"
+                }
+            }
+        ]
+    }
+}

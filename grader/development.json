@@ -1,0 +1,45 @@
+{
+    "metadata": {
+        "labels": {
+            "run": "grader"
+        },
+        "name": "grader"
+    },
+    "spec": {
+        "containers": [
+            {
+                "args": [
+                    "bash"
+                ],
+                "image": "python:3.7.0",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "grader",
+                "ports": [
+                    {
+                        "containerPort": 5000,
+                        "protocol": "TCP"
+                    }
+                ],
+                "stdin": true,
+                "stdinOnce": true,
+                "tty": true,
+                "volumeMounts": [
+                    {
+                        "mountPath": "/src/grader",
+                        "name": "grader-src"
+                    }
+                ]
+            }
+        ],
+        "restartPolicy": "Never",
+        "volumes": [
+            {
+                "name": "grader-src",
+                "hostPath": {
+                    "path": "/src/grader",
+                    "type": "Directory"
+                }
+            }
+        ]
+    }
+}
