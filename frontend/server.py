@@ -30,6 +30,7 @@ class MQConsumer(object):
     def on_message(self, unused_channel, basic_deliver, properties, body):
         LOGGER.info('Received message # %s from %s: %s',
                     basic_deliver.delivery_tag, properties.app_id, body)
+        #XXX message received from queue
         for client in clients:
             client.write_message(body)
 
@@ -238,6 +239,7 @@ class SocketHandler(tornado.websocket.WebSocketHandler):
         clients.remove(self)
 
     def on_message(self, message):
+        #XXX socket message received from client
         print('received', message)
         mq_client.publish(message)
 

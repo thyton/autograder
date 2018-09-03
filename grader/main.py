@@ -11,6 +11,7 @@ channel.queue_bind(queue='grader', exchange='grader')
 def callback(ch, method, props, body):
     print('received', body)
     print('repsponding to', props.reply_to)
+    #XXX received something for grading, do something and reply
     ch.basic_publish(exchange='grader',
                      routing_key=props.reply_to,
                      body='done')
